@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# *-* coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from collections import defaultdict
 from itertools import groupby
@@ -55,7 +55,6 @@ def find_matches(file_name):
                 if processed_tag in processed_line:
                     truncated_line = get_truncated_text(line.strip(), 100)
                     priority_char_idx = processed_line.find(processed_tag)
-
                     regex = re.compile(r"""
                             (\([Ll][Oo][Ww]\) # Low
                             |
