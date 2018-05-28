@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# *-* coding: utf-8 -*-
+
 from collections import defaultdict
 from itertools import groupby
 import argparse
@@ -52,7 +55,16 @@ def find_matches(file_name):
                 if processed_tag in processed_line:
                     truncated_line = get_truncated_text(line.strip(), 100)
                     priority_char_idx = processed_line.find(processed_tag)
-                    priority_match = re.search(r"\(([A-Za-z0-9_]+)\)", processed_line)
+
+                    regex = re.compile(r"""
+                            (\([Ll][Oo][Ww]\) # Low
+                            |
+                            \([Mm][Ee][Dd][Ii][Uu][Mm]\) # Medium
+                            |
+                            \([Hh][Ii][Gg][Hh]\)) # High
+                            """,
+                            re.VERBOSE)
+                    priority_match = re.search(regex, processed_line) 
                     priority = priority_map["NONE"]
 
                     if priority_match is not None:
